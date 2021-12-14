@@ -3,7 +3,7 @@
 
 Twitter APIを利用してツイートします。
 
-# # 環境
+# 環境
 
 - Python 3.8.1
 - Django 4.0
