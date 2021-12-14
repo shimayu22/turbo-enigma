@@ -22,7 +22,7 @@ def tweet_myaccount(self):
     return redirect('https://twitter.com/home')
 
 def tweet(self):
-
+    # 認証準備
     auth = tweepy.OAuthHandler(getenv('API_KEY'), getenv('API_SECRET_KEY'))
 
     # Twitter認証画面URLを取得する
@@ -35,9 +35,6 @@ def tweet(self):
     return redirect(redirect_url)
 
 def callback(request):
-    # POSTの内容を取得
-
-
     # 認証画面でキャンセルした時の戻り先
     if 'denied' in request.GET.dict():
         return redirect(getenv('BACK_URL'))
