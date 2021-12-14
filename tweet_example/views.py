@@ -11,6 +11,11 @@ def index(self, request):
     template = loader.get_template("tweet_example/index.html")
     return HttpResponse(template.render())
 
+def tweet_myaccount(self, request):
+
+    # ここで認証ページに遷移する
+    return redirect(redirect_url)
+
 def tweet(self, request):
 
      # Twitter認証画面URLを取得する
