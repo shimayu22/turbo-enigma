@@ -42,7 +42,7 @@ def callback(request):
     # 認証した場合の処理
     # ツイートするユーザーのトークンを取得する準備
     auth = tweepy.OAuthHandler(getenv('API_KEY'), getenv('API_SECRET_KEY'))
-    auth.request_token['oauth_token'] = request.GET['oauth_token']
+    auth.request_token['oauth_token'] = oauth_token = request.GET['oauth_token']
     auth.request_token['oauth_token_secret'] = oauth_verifier = request.GET['oauth_verifier']
 
     # ツイートするユーザーのシークレットトークンを取得する
@@ -54,7 +54,7 @@ def callback(request):
     # ツイートする
     auth.set_access_token(auth.access_token, auth.access_token_secret)
     api = tweepy.API(auth)
-    api.update_status("これはテスト投稿です。認証画面を経由して投稿しています。")
+    api.update_status("認証画面を経由して投稿しています。テスト投稿です。")
 
     # Twitterにリダイレクトする
     return redirect('https://twitter.com/home')
