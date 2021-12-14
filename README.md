@@ -12,7 +12,7 @@ Twitter APIを利用してツイートします。
 
 ひとまずvenvで動きます。
 
-### Win版
+## Win版
     python -m venv env
     env\Sctipts\activate
     pip install -r requirements.txt
@@ -21,7 +21,7 @@ Twitter APIを利用してツイートします。
     type nul > .env
 
 
-### Mac版
+## Mac版
     python3 -m venv env
     source env/bin/activate
     pip install -r requirements.txt
@@ -29,9 +29,16 @@ Twitter APIを利用してツイートします。
     python config/get_random_secret_key.py >> config/local_settings.py
     touch .env
 
-### .envファイルにキーを入力する
+## .envファイルにキーを入力する
 - [Twitterデベロッパーサイト]()でアプリを申請した時に取得した各種キーを.envファイルに記入します
 - （例）
+
+## CallbackURLを設定する
+- [Twitterデベロッパーサイト]()のCallback先のURLを`http://127.0.0.1:8000/`に設定する
+  - ここでは`python manage.py runserver`で使用されるURLを指定しています
+
+## サーバーを起動する
+- `python manage.py runserver`
 
 # ボタンをクリックするとツイートする
 ## 自分のアカウントでツイートする
