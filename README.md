@@ -18,9 +18,8 @@ Twitter APIを利用してツイートします。
     pip install -r requirements.txt
     type nul > local_settings.py
     python config/get_random_secret_key.py >> config/local_settings.py
-    manage.py migrate
-    manage.py createsuperuser
-    manage.py runserver
+    type nul > .env
+
 
 ### Mac版
     python3 -m venv env
@@ -28,7 +27,9 @@ Twitter APIを利用してツイートします。
     pip install -r requirements.txt
     touch config/local_settings.py
     python config/get_random_secret_key.py >> config/local_settings.py
-    python manage.py migrate
-    python manage.py createsuperuser
-    python manage.py runserver
+    touch .env
+
+### .envファイルにキーを入力する
+- [Twitterデベロッパーサイト]()でアプリを申請した時に取得したAPI Key、API Secret Keyを.envファイルに記入します
+- （例）
     
