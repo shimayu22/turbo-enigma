@@ -30,11 +30,19 @@ Twitter APIを利用してツイートします。
     touch .env
 
 ## .envファイルにキーを入力する
-- [Twitterデベロッパーサイト]()でアプリを申請した時に取得した各種キーを.envファイルに記入します
+- [Twitterデベロッパーサイト](https://developer.twitter.com/en/portal/dashboard)でアプリを申請した時に取得した各種キーを.envファイルに記入します
 - （例）
 
+```
+API_KEY=xxxxxxxxxxxxxxxxxxx
+API_SECRET_KEY=xxxxxxxxxxxxxxxxxxx
+ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxx
+ACCESS_TOKEN_SECRET=xxxxxxxxxxxxxxxxxxx
+BACK_URL=http://127.0.0.1:8000
+```
+
 ## CallbackURLを設定する
-- [Twitterデベロッパーサイト]()のCallback先のURLを`http://127.0.0.1:8000/`に設定する
+- [Twitterデベロッパーサイト](https://developer.twitter.com/en/portal/dashboard)の`CALLBACK URLS`のURLを`http://127.0.0.1:8000/`に設定する
   - ここでは`python manage.py runserver`で使用されるURLを指定しています
 
 ## サーバーを起動する

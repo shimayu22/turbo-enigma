@@ -5,23 +5,27 @@ from django.shortcuts import redirect
 from os import getenv
 from dotenv import load_dotenv
 load_dotenv()
-import tweepy
+import tweepy, ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
-def index(self, request):
+def index(self):
     template = loader.get_template("tweet_example/index.html")
     return HttpResponse(template.render())
 
-def tweet_myaccount(self, request):
+def tweet_myaccount(self):
+    auth = tweepy.OAuthHandler(getenv('API_KEY'), getenv('API_SECRET_KEY'))
+    auth.set_access_token(getenv('ACCESS_TOKEN'), getenv('ACCESS_TOKEN_SECRET'))
+    api = tweepy.API(auth)
+    api.update_status("これはテスト投稿です。tweepyを利用して投稿しています。")
 
-    # ここで認証ページに遷移する
-    return redirect(redirect_url)
+    # Twitterにリダイレクトする
+    return redirect('https://twitter.com/home')
 
-def tweet(self, request):
+def tweet(self):
 
-     # Twitter認証画面URLを取得する
-    auth = tweepy.OAuthHandler(getenv('CONSUMER_KEY'), getenv('CONSUMER_SECRET'))
+    auth = tweepy.OAuthHandler(getenv('API_KEY'), getenv('API_SECRET_KEY'))
 
-
+    # Twitter認証画面URLを取得する
     try:
         redirect_url = auth.get_authorization_url()
     except tweepy.TweepyException:
@@ -30,16 +34,19 @@ def tweet(self, request):
     # ここで認証ページに遷移する
     return redirect(redirect_url)
 
-def callback(self, request):
+def callback(request):
+    # POSTの内容を取得
+
+
     # 認証画面でキャンセルした時の戻り先
-    if 'denied' in request.query_params.dict():
+    if 'denied' in request.GET.dict():
         return redirect(getenv('BACK_URL'))
     
     # 認証した場合の処理
     # ツイートするユーザーのトークンを取得する準備
-    auth = tweepy.OAuthHandler(getenv('CONSUMER_KEY'), getenv('CONSUMER_SECRET'))
-    auth.request_token['oauth_token'] = oauth_token = request.query_params['oauth_token']
-    auth.request_token['oauth_token_secret'] = oauth_verifier = request.query_params['oauth_verifier']
+    auth = tweepy.OAuthHandler(getenv('API_KEY'), getenv('API_SECRET_KEY'))
+    auth.request_token['oauth_token'] = request.GET['oauth_token']
+    auth.request_token['oauth_token_secret'] = oauth_verifier = request.GET['oauth_verifier']
 
     # ツイートするユーザーのシークレットトークンを取得する
     try:
@@ -50,7 +57,7 @@ def callback(self, request):
     # ツイートする
     auth.set_access_token(auth.access_token, auth.access_token_secret)
     api = tweepy.API(auth)
-    api.update_status("これはテスト投稿です。tweepyを使って投稿しています。")
+    api.update_status("これはテスト投稿です。認証画面を経由して投稿しています。")
 
     # Twitterにリダイレクトする
     return redirect('https://twitter.com/home')
