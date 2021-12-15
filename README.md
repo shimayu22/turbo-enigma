@@ -38,7 +38,6 @@ API_KEY=xxxxxxxxxxxxxxxxxxx
 API_SECRET_KEY=xxxxxxxxxxxxxxxxxxx
 ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxx
 ACCESS_TOKEN_SECRET=xxxxxxxxxxxxxxxxxxx
-BACK_URL=http://127.0.0.1:8000
 ```
 
 ## CallbackURLを設定する
